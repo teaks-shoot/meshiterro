@@ -2,6 +2,11 @@ Rails.application.routes.draw do
   devise_for :users
   root to: "homes#top"
   
+  devise_for :admin, skip: [:registrations, :password], controllers: {
+    sessions: 'admin/sessions'
+  }
+
+  
   resources :post_images, only: [:new, :create, :index, :show, :destroy] do
     resource :favorite, only: [:create, :destroy]
     resources :post_comments, only: [:create, :destroy]
